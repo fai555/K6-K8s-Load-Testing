@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: influxdb
+  name: influxdb
+spec:
+  replicas: 1
+  strategy: {}
+  selector:
+    matchLabels:
+      app: influxdb  
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      containers:
+      - env:
+        - name: INFLUXDB_DB
+          value: k6
+        image: influxdb:latest
+        name: influxdb
+        ports:
+        - containerPort: 8086
+        resources: {}
+      restartPolicy: Always
+status: {}
